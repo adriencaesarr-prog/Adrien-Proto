@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jual beli mobil & motor</title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Adri Jual beli</h1>
+      <nav>
+        <a href="#about"><i data-feather="aperture"></i></a>
+        <a href="#jenis"><i data-feather="truck"></i></a>
+        <a href="#booking"><i data-feather="shopping-cart"></i></a>
+      </nav>
+    </header>
+    <section class="hero">
+      <div class="hero-text">
+        <h2>Dapatkan kendaraan favorit anda di kami</h2>
+        <p>kualitas kendaraan di jamin paling bagus dengan harga murah</p>
+        <a href="#jenis" class="btn">lihat jenis kendaraan</a>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <h2>Tentang kami</h2>
+      <p>Tempat jual bli otomotif terpercaya</p>
+      <img
+        src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNhcnxlbnwwfHwwfHx8MA%3D%3D"
+        alt="toko kami"
+      />
+    </section>
+
+    <section id="Jenis" class="jenis">
+      <h2>kendaraan hits 2025</h2>
+      <div class="jenis-list">
+        <div class="jenis-kendaraan">
+          <img
+            src="https://images.unsplash.com/photo-1692166135489-58387e4519cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TTN8ZW58MHx8MHx8fDA%3D"
+            alt="BMW M3"
+          />
+          <h3>BMW M3</h3>
+          <p>Kendaraan mewah 2025</p>
+        </div>
+        <div class="jenis-kendaraan">
+          <img
+            src="https://images.unsplash.com/photo-1741889823656-c056b0c43749?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE00fGVufDB8fDB8fHww"
+            alt="BMW M4"
+          />
+          <h3>BMW M4</h3>
+          <p>Kendaraan mewah 2025</p>
+        </div>
+        <div class="jenis-kendaraan">
+          <img
+            src="https://images.unsplash.com/photo-1669730240702-0037bad42a9f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8TTV8ZW58MHx8MHx8fDA%3D"
+            alt="BMW M5"
+          />
+          <h3>BMW M5</h3>
+          <p>Kendaraan mewah 2025</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="booking" class="booking">
+      <h2>Form pemesanan</h2>
+      <form>
+        <laber>Nama lengkap</laber>
+        <input type="text" placeholder="masukan nama" required />
+        <label>Email</label>
+        <input type="email" placeholder="masukan email" required />
+        <label>pilih jenis</label>
+        <select>
+          <option>BMW M3</option>
+          <option>BMW M4</option>
+          <option>BMW M5</option>
+        </select>
+        <label>Tanggal pengiriman</label>
+        <input type="date" required />
+        <button type="submit" class="btn">Order</button>
+      </form>
+    </section>
+    <footer id="contact">
+      <p>
+        Adri Jual beli &copy 2025 | hubungi kami di
+        <a href="mailto:emailproto.@gmail.com">info@adri.com</a>
+      </p>
+    </footer>
+    <script>
+      feather.replace();
+    </script>
+
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbzltYrGD4t_NUF67xdAQDiNX5FENn2dNv7vLpj6jbmb1bBA1fQiabRnu5AH1EWgrdI/exec";
+      const WA_NUMBER = "6285280419527";
+
+      document
+        .querySelector("form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const nama = document.querySelector('input[type="text"]').value;
+          const email = document.querySelector('input[type="email"]').value;
+          const paket = document.querySelector("select").value;
+          const tanggal = document.querySelector('input[type="date"]').value;
+
+          const data = { nama, email, paket, tanggal };
+
+          const msg =
+            `Hallo Saya Ingin Memesan Kendaraan :%0A` +
+            `Nama : ${nama}%0A` +
+            `Email : ${email}%0A` +
+            `Paket : ${paket}%0A` +
+            `Tanggal : ${tanggal}`;
+
+          fetch(scriptURL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }).then(() => {
+            // ===== PRIORITAS 1: BUKA APLIKASI WHATSAPP DESKTOP =====
+            let appLink = `whatsapp://send?phone=${WA_NUMBER}&text=${msg}`;
+
+            // ===== FALLBACK 2: WHATSAPP WEB =====
+            let webLink = `https://web.whatsapp.com/send?phone=${WA_NUMBER}&text=${msg}`;
+
+            // ===== FALLBACK 3: wa.me (untuk semua device) =====
+            let waMe = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+
+            // Coba buka aplikasi
+            let win = window.open(appLink);
+
+            // Jika browser memblokir attempt → fallback ke web
+            setTimeout(() => {
+              if (!win || win.closed || typeof win.closed === "undefined") {
+                window.open(webLink, "_blank");
+              }
+            }, 1500);
+
+            setTimeout(() => {
+              window.open(waMe, "_blank");
+            }, 3000);
+
+            alert("pemesanan berhasil");
+            document.querySelector("form").reset();
+          });
+        });
+    </script>
+  </body>
+</html>
